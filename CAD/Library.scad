@@ -1,4 +1,22 @@
+x = 280;
+y = 260;
+z = 128;
+Wall = 8;
+CornerRad = 10;
+Handle = 125+2*Wall;
+HandleD = 30;
+HandleClearance = 50;
+CasterHole = 450-280;
+CasterD = 57;
+CasterBoltD = 12;
+CasterH = 75;
 
+TailH = z-CasterH-Wall/2;
+TailL = CasterHole+CasterD/2+HandleClearance+HandleD/2;
+
+Tailm = (TailH-(HandleD/2))/(0-TailL);
+Tailb = TailH-Tailm*0;
+TailPrism = -Tailb/Tailm;
 
 
 
@@ -28,3 +46,27 @@ module roundPrism(l,w,h,rad){
         }
     }
 }
+
+module Tail(){
+    
+    translate([0,-(TailPrism-TailL),0]){
+        difference(){
+            prism(Handle,TailPrism,TailH);
+            
+            translate([Wall,0,Wall/2]){// scoop out the middle
+                roundCube([Handle-2*Wall,TailPrism-Wall,TailH+Wall],CornerRad);
+            }
+            translate([-1,-1,-1]){// snip the end off
+                cube([Handle*2,TailPrism-TailL,TailH]);
+            }
+            translate([Wall,0,-1]){// blow out the Handle Clearance
+                cube([Handle-2*Wall,TailPrism-TailL+HandleD/2+HandleClearance,TailH]);
+            }
+            translate([Handle/2,TailPrism-TailL+HandleD/2+HandleClearance+CasterD/2,0]){//drill caster bolt hole
+                cylinder(r=CasterBoltD/2,h=2*TailH,center=true,$fn=100);
+            }
+        }
+    }
+    
+}
+
