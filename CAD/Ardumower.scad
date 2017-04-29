@@ -64,3 +64,18 @@ translate([HandleClearance+HandleD,y/2,0]){ //Caster
 // grass height 3"
 //75 between bottom of tub and top of caster
 //diameter of caster surface 57
+
+
+//76.2mm from blade to ground
+// blade motor shaft extends 35.6108 from mounting face. 
+BladeH = 76.2;
+BladeMotorShaftL = 35.6108;
+WheelD = 250;
+WheelMotorD = 25;
+WheelMotorMountingHoleL = 8.5; //distance from center of shaft to center of mounting hole.
+
+TubBottomH = BladeH+BladeMotorShaftL-Wall;
+
+WheelMotorShaftH = WheelD/2-TubBottomH; // height from bottom of tub to center of motor shaft. This comes out to be very close to just setting the motor on the bottom of the tub. So that is what I'm going to do. 
+WheelMotorShaftH = Wall+WheelMotorD/2;
+
