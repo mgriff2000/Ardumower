@@ -35,6 +35,7 @@ difference(){
 }
 */
 
+
 union(){
     Tail();
     mirror([0,0,1]){
@@ -45,15 +46,12 @@ union(){
     }
 }
 
+
+/*
 translate([Handle/2,HandleD/2+HandleClearance+CasterD/2,0]){
     %cylinder(r=CasterD/2,h=200,center=true);
 }
-/*
-translate([HandleClearance+HandleD,y/2,0]){ //Caster
-    cylinder(r=57/2,h=75,center=false);
-}
 */
-
 
 //316mm in between wheels
 //wheel diameter 250

@@ -56,6 +56,18 @@ module Tail(){
             translate([Wall,0,Wall/2]){// scoop out the middle
                 roundCube([Handle-2*Wall,TailPrism-Wall,TailH+Wall],CornerRad);
             }
+            translate([Handle/3,0,TailH-(TailH-Wall/2-CornerRad)/2]){//poke mounting hole
+                rotate([90,0,0]){
+                    cylinder(r=9/2,h=1000,center=true,$fn=100);
+                }
+            }
+
+            translate([2*Handle/3,0,TailH-(TailH-Wall/2-CornerRad)/2]){//poke another mounting hole
+                rotate([90,0,0]){
+                    cylinder(r=9/2,h=1000,center=true,$fn=100);
+                }
+            }  
+            
             translate([-1,-1,-1]){// snip the end off
                 cube([Handle*2,TailPrism-TailL,TailH]);
             }
