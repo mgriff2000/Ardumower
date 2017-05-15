@@ -4,7 +4,7 @@ include <Library.scad>;
 //cylinder(8,95,center=false); //cutting disk
 
 // Tub
-CircTol = 0.2;
+CircTol = 0.1;
 Tol = 0.2;
 x = 280;
 y = 260;
@@ -29,6 +29,8 @@ TailPrism = -Tailb/Tailm;
 BladeH = 76.2;
 BladeMotorShaftL = 35.6108;
 BladeMotorD = 64.4144;
+BladeMotorShaftHoleD = 19.05;
+BladeMotorMountingHoleL = 25.4;//distance from center
 WheelD = 250;
 WheelMotorD = 25;
 WheelMotorMountingHoleL = 8.5; //distance from center of shaft to center of mounting hole.
@@ -39,30 +41,13 @@ WheelMotorShaftH = WheelD/2-TubBottomH; // height from bottom of tub to center o
 WheelMotorShaftH = Wall+WheelMotorD/2;
 WheelMotorL = 65.5; // not including shaft and 
 WheelMototShaftHoleD = 7+CircTol+Tol;
-BladeL = 25;
+BladeL = 13.1;
 BladeDiskD = 190;
 CenterWheelMotorShaft = Wall+WheelD/2;
+    
+//Tub();
 
-difference(){
-    cube([x,y,z]); // outer walls of tub
-        translate([Wall,Wall,Wall]){
-            roundCube([WheelD/2-WheelMotorD/2-2*Wall,y-2*Wall,2*z],CornerRad);
-        }
-        translate([WheelD/2+WheelMotorD/2+Wall,Wall,Wall]){
-            roundCube([x-WheelD/2-WheelMotorD/2-2*Wall,y-2*Wall,2*z],CornerRad);
-        }
-        translate([WheelD/2-WheelMotorD/2,Wall,Wall]){
-            cube([WheelMotorD,y-2*Wall,2*z]);
-        }
-        translate([WheelD/2-WheelMotorD/2-Wall-CornerRad,Wall,WheelMotorD/2+2*Wall]){
-            cube([WheelMotorD+2*Wall+2*CornerRad,y-2*Wall,2*z]);
-        }
-        translate([Wall+BladeL+BladeDiskD/2,y/2,Wall]){
-            cylinder(r=BladeMotorD/2,h=2*z);
-        }
-}
-
-
+//BladeDisk();
 
 /*
 union(){
