@@ -10,7 +10,7 @@ CasterHole = 450-280;
 CasterD = 57;
 CasterBoltD = 12;
 CasterH = 75;
-CircTol = 0.1;
+CircTol = 0.2;
 Tol = 0.2;
 TailH = z-CasterH-Wall/2;
 TailL = CasterHole+CasterD/2+HandleClearance+HandleD/2;
@@ -19,6 +19,7 @@ Tailm = (TailH-(HandleD/2))/(0-TailL);
 Tailb = TailH-Tailm*0;
 TailPrism = -Tailb/Tailm;
 M2Tap = 1.6;
+UNF1_72Tap = 1.5113;
 M3Clearance = 3.4;
 M8Tap = 6.8;
 UNF10_32Clearance = 5.61;
@@ -244,17 +245,17 @@ cylinder(r=BladeDiskD/2,h=Wall,$fn=100);
     }
 }
 translate([0,0,Wall]){
-    cylinder(r=8/2,h=2*(2*8+10),$fn=100);
+    cylinder(r=8/2+CircTol,h=2*(2*8+10),$fn=100);
 }
 
 translate([0,0,Wall+8]){
     rotate([90,0,0]){
-        cylinder(r=M2Tap/2+CircTol,h=2*(Wall+CornerRad),$fn=100);
+        cylinder(r=UNF1_72Tap/2+CircTol,h=2*(Wall+CornerRad),$fn=100);
     }
 }
 translate([0,0,Wall+8+10]){
     rotate([90,0,0]){
-        cylinder(r=M2Tap/2+CircTol,h=2*(Wall+CornerRad),$fn=100);
+        cylinder(r=UNF1_72Tap/2+CircTol,h=2*(Wall+CornerRad),$fn=100);
     }
 }
 

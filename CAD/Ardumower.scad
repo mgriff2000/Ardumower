@@ -4,7 +4,7 @@ include <Library.scad>;
 //cylinder(8,95,center=false); //cutting disk
 
 // Tub
-CircTol = 0.1;
+CircTol = 0.2;
 Tol = 0.2;
 x = 280;
 y = 260;
@@ -47,7 +47,7 @@ CenterWheelMotorShaft = Wall+WheelD/2;
     
 //Tub();
 
-//BladeDisk();
+BladeDisk();
 
 /*
 union(){
