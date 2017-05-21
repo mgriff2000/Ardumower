@@ -47,9 +47,9 @@ CenterWheelMotorShaft = Wall+WheelD/2;
     
 //Tub();
 
-BladeDisk();
+//BladeDisk();
 
-/*
+
 union(){
     Tail();
     mirror([0,0,1]){
@@ -59,7 +59,7 @@ union(){
         cylinder(r=HandleD/2,h=Handle,center=false);
     }
 }
-*/
+
 
 /*
 translate([Handle/2,HandleD/2+HandleClearance+CasterD/2,0]){
