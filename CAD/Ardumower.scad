@@ -4,52 +4,16 @@ include <Library.scad>;
 //cylinder(8,95,center=false); //cutting disk
 
 // Tub
-CircTol = 0.2;
-Tol = 0.2;
-x = 280;
-y = 260;
-z = 128;
-Wall = 8;
-CornerRad = 12.5;
-Handle = 125+2*Wall;
-HandleD = 30; 
-HandleClearance = 50;
-CasterHole = 450-280;
-CasterD = 57;
-CasterBoltD = 12;
-CasterH = 75;
 
-TailH = z-CasterH-Wall/2;
-TailL = CasterHole+CasterD/2+HandleClearance+HandleD/2;
+translate([0,0,TubBottomFromGround]){   
+Tub();
+}
+translate([Wall+BladeL+BladeDiskD/2,y/2,TubBottomFromGround-Wall-BladeMotorShaftL]){
+BladeDisk();
+}
 
-Tailm = (TailH-(HandleD/2))/(0-TailL);
-Tailb = TailH-Tailm*0;
-TailPrism = -Tailb/Tailm;
-
-BladeH = 76.2;
-BladeMotorShaftL = 35.6108;
-BladeMotorD = 64.4144;
-BladeMotorShaftHoleD = 19.05;
-BladeMotorMountingHoleL = 25.4;//distance from center
-WheelD = 250;
-WheelMotorD = 25;
-WheelMotorMountingHoleL = 8.5; //distance from center of shaft to center of mounting hole.
-
-TubBottomH = BladeH+BladeMotorShaftL-Wall;
-
-WheelMotorShaftH = WheelD/2-TubBottomH; // height from bottom of tub to center of motor shaft. This comes out to be very close to just setting the motor on the bottom of the tub. So that is what I'm going to do. 
-WheelMotorShaftH = Wall+WheelMotorD/2;
-WheelMotorL = 65.5; // not including shaft and 
-WheelMototShaftHoleD = 7+CircTol+Tol;
-BladeL = 13.1;
-BladeDiskD = 190;
-CenterWheelMotorShaft = Wall+WheelD/2;
-    
-//Tub();
-
-//BladeDisk();
-
-
+translate([x+(TailL),y/2-(Handle)/2,CasterH+Wall/2]){
+rotate([0,0,90]){
 union(){
     Tail();
     mirror([0,0,1]){
@@ -59,15 +23,28 @@ union(){
         cylinder(r=HandleD/2,h=Handle,center=false);
     }
 }
-
-
-/*
-translate([Handle/2,HandleD/2+HandleClearance+CasterD/2,0]){
-    %cylinder(r=CasterD/2,h=200,center=true);
 }
-*/
+}
 
 
+translate([x+CasterHole,y/2,0]){
+    cylinder(r=CasterD/2,h=CasterH);
+    translate([-CasterOffset,0,CasterWheelD/2]){
+    sphere(r=CasterWheelD/2);
+    }
+}
+
+translate([WheelD/2+Wall,0,WheelD/2]){
+    rotate([90,0,0]){
+Wheel();
+    }
+}
+
+translate([WheelD/2+Wall,y+Wall,WheelD/2]){
+    rotate([90,0,0]){
+Wheel();
+    }
+}
 
 //316mm in between wheels
 //wheel diameter 250
@@ -84,10 +61,5 @@ translate([Handle/2,HandleD/2+HandleClearance+CasterD/2,0]){
 // blade motor shaft extends 35.6108 from mounting face. 
 
 // motor set screw should be M2 10mm long?
-
-
-//Wheel();
-
-
 
 
