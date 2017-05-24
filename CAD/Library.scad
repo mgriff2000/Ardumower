@@ -2,6 +2,7 @@ M2Tap = 1.6;
 UNF1_72Tap = 1.5113;
 M3Clearance = 3.4;
 M8Tap = 6.8;
+M8Clearance = 9;
 UNF10_32Clearance = 5.61;
 CircTol = 0.1;
 Tol = 0.2;
