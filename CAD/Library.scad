@@ -8,7 +8,7 @@ CircTol = 0.1;
 Tol = 0.2;
 x = 280;
 y = 260;
-z = 128;
+//z = 128;
 Wall = 8;
 CornerRad = 10;
 Handle = 125+2*Wall;
@@ -40,8 +40,9 @@ WheelMotorShaftH = WheelD/2-TubBottomH; // height from bottom of tub to center o
 WheelMotorShaftH = Wall+WheelMotorD/2;
 WheelMotorL = 65.5; // not including shaft and 
 WheelMototShaftHoleD = 7+CircTol+Tol;
-BladeL = 25;
 BladeDiskD = 190;
+BladeMountingHoleR = 85;
+
 CenterWheelMotorShaft = Wall+WheelD/2;
 
 TubBottomFromGround = WheelD/2-Wall-WheelMotorD/2;
@@ -52,7 +53,8 @@ Tailm = (TailH-(HandleD/2))/(0-TailL);
 Tailb = TailH-Tailm*0;
 TailPrism = -Tailb/Tailm;
 
-
+z = CasterH-TubBottomFromGround+TailH+Wall/2;
+echo(z);
 module roundCube(dim=[10,10,10],rad=1){
     translate([rad,rad,rad]){
         minkowski() {
@@ -202,7 +204,6 @@ difference(){
 }
 
 
-
 module Tub(){
 difference(){
 union(){
@@ -252,7 +253,29 @@ translate([WheelD/2,0,Wall+WheelMotorD/2]){
         }
         translate([Wall+BladeL+BladeDiskD/2-BladeMotorMountingHoleL,y/2,Wall]){
             cylinder(r=UNF10_32Clearance/2+CircTol,h=2*z,center=true,$fn=100);
-        }        
+        } 
+        
+         translate([x-10,y/2-(Handle/3)/2,CasterH-TubBottomFromGround+CornerRad+2.25*Wall]){
+            rotate([0,90,0]){
+            cylinder(r=M8Clearance/2+CircTol,h=x,center=false,$fn=100);
+            }
+        }
+         translate([x-10,y/2+(Handle/3)/2,CasterH-TubBottomFromGround+CornerRad+2.25*Wall]){
+            rotate([0,90,0]){
+            cylinder(r=M8Clearance/2+CircTol,h=x,center=false,$fn=100);
+            }
+        }
+         translate([x-10,y/2-(Handle/3)/2,CasterH-TubBottomFromGround-CornerRad-1.25*Wall]){
+            rotate([0,90,0]){
+            cylinder(r=M8Clearance/2+CircTol,h=x,center=false,$fn=100);
+            }
+        }
+         translate([x-10,y/2+(Handle/3)/2,CasterH-TubBottomFromGround-CornerRad-1.25*Wall]){
+            rotate([0,90,0]){
+            cylinder(r=M8Clearance/2+CircTol,h=x,center=false,$fn=100);
+            }
+        }
+        
 }
     
 }
@@ -283,17 +306,17 @@ translate([0,0,Wall+8+10]){
     }
 }
 
-translate([85,0,0]){
+translate([BladeMountingHoleR,0,0]){
     cylinder(r=M8Tap/2+CircTol,h=4*Wall,$fn=100,center=true);
 }
 rotate([0,0,120]){
-translate([85,0,0]){
+translate([BladeMountingHoleR,0,0]){
     cylinder(r=M8Tap/2+CircTol,h=4*Wall,$fn=100,center=true);
 }
 }
 
 rotate([0,0,-120]){
-translate([85,0,0]){
+translate([BladeMountingHoleR,0,0]){
     cylinder(r=M8Tap/2+CircTol,h=4*Wall,$fn=100,center=true);
 }
 }
