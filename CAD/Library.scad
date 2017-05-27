@@ -6,8 +6,8 @@ M8Clearance = 9;
 UNF10_32Clearance = 5.61;
 CircTol = 0.1;
 Tol = 0.2;
-x = 280;
-y = 260;
+x = 260;
+y = 280;
 //z = 128;
 Wall = 8;
 CornerRad = 10;
@@ -30,6 +30,8 @@ BladeMotorShaftL = 35.6108;
 BladeMotorD = 64.4144;
 BladeMotorShaftHoleD = 19.05;
 BladeMotorMountingHoleL = 25.4;//distance from center
+BladeMotorL = 4.5*25.4;
+BladeL = 25;
 WheelD = 250;
 WheelMotorD = 25;
 WheelMotorMountingHoleL = 8.5; //distance from center of shaft to center of mounting hole.
@@ -54,7 +56,10 @@ Tailb = TailH-Tailm*0;
 TailPrism = -Tailb/Tailm;
 
 z = CasterH-TubBottomFromGround+TailH+Wall/2;
-echo(z);
+
+Brickx = 75;
+Bricky = 126+108-3;
+Brickz = 150;
 module roundCube(dim=[10,10,10],rad=1){
     translate([rad,rad,rad]){
         minkowski() {

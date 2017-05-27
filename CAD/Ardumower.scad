@@ -4,10 +4,32 @@ include <Library.scad>;
 //cylinder(8,95,center=false); //cutting disk
 
 //Tub();
-
-translate([0,0,TubBottomFromGround]){   
+/*
+            translate([Wall+3,Wall+3,Wall ]){
+                rotate([0,0,-19]){
+        cube([0.06*25.4,273,4.5*25.4]);
+        }
+    }
+    */
+translate([0,0,TubBottomFromGround]){
+  color("LawnGreen"){  
 Tub();
+  }
+translate([Wall+3,Wall+3,Wall ]){
+                rotate([0,0,-19]){
+        cube([0.06*25.4,273,4.5*25.4]);
+        }
+    }
+    translate([x-Wall-CornerRad/2-Brickx,(y-Bricky)/2,Wall]){
+        cube([Brickx,Bricky,Brickz]);
+
+    }
+    
+    translate([Wall+BladeL+BladeDiskD/2,y/2,Wall]){
+cylinder(r=BladeMotorD/2,h = BladeMotorL);
 }
+}
+color("LawnGreen"){
 translate([Wall+BladeL+BladeDiskD/2,y/2,TubBottomFromGround-Wall-BladeMotorShaftL]){
 BladeDisk();
 }
@@ -32,12 +54,7 @@ translate([10,10,0]){
 }
 
 
-translate([x+CasterHole,y/2,0]){
-    cylinder(r=CasterD/2,h=CasterH);
-    translate([-CasterOffset,0,CasterWheelD/2]){
-    sphere(r=CasterWheelD/2);
-    }
-}
+
 
 translate([WheelD/2+Wall,0,WheelD/2]){
     rotate([90,0,0]){
@@ -48,6 +65,14 @@ Wheel();
 translate([WheelD/2+Wall,y+Wall,WheelD/2]){
     rotate([90,0,0]){
 Wheel();
+    }
+}
+}
+
+translate([x+CasterHole,y/2,0]){
+    cylinder(r=CasterD/2,h=CasterH);
+    translate([-CasterOffset,0,CasterWheelD/2]){
+    sphere(r=CasterWheelD/2);
     }
 }
 
