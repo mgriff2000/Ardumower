@@ -60,6 +60,9 @@ z = CasterH-TubBottomFromGround+TailH+Wall/2;
 Brickx = 75;
 Bricky = 126+108-3;
 Brickz = 150;
+
+theta = -atan2(z-WheelMotorD,x-Wall);
+circuitBoardHoley = 17.75;
 module roundCube(dim=[10,10,10],rad=1){
     translate([rad,rad,rad]){
         minkowski() {
@@ -210,34 +213,41 @@ difference(){
 
 
 module Tub(){
+    
 difference(){
 union(){
 difference(){
     cube([x,y,z]); // outer walls of tub
         translate([Wall,Wall,Wall]){
-            roundCube([WheelD/2-WheelMotorD/2-2*Wall,y-2*Wall,2*z],CornerRad);
+            roundCube([WheelD/2-WheelMotorD/2-Wall,y-2*Wall,2*z],CornerRad);
         }
-        translate([WheelD/2+WheelMotorD/2+Wall,Wall,Wall]){
-            roundCube([x-WheelD/2-WheelMotorD/2-2*Wall,y-2*Wall,2*z],CornerRad);
+        translate([WheelD/2+WheelMotorD/2+2*Wall,Wall,Wall]){
+            roundCube([x-WheelD/2-WheelMotorD/2-3*Wall,y-2*Wall,2*z],CornerRad);
         }
-        translate([WheelD/2-WheelMotorD/2,Wall,Wall]){
+        translate([Wall+WheelD/2-WheelMotorD/2,Wall,Wall]){
             cube([WheelMotorD,y-2*Wall,2*z]);
         }
-translate([WheelD/2,0,Wall+WheelMotorD/2]){
+translate([Wall+WheelD/2,0,Wall+WheelMotorD/2]){
             rotate([90,0,0]){
-            cylinder(r=WheelMototShaftHoleD/2,h=x*2,center=true,$fn=100);
+            cylinder(r=WheelMototShaftHoleD/2,h=x*3,center=true,$fn=100);
             }
         }
-        translate([WheelD/2,0,Wall+WheelMotorD/2+WheelMotorMountingHoleL]){
+        translate([Wall+WheelD/2,0,Wall+WheelMotorD/2+WheelMotorMountingHoleL]){
             rotate([90,0,0]){
-            cylinder(r=M3Clearance/2+CircTol,h=x*2,center=true,$fn=100);
+            cylinder(r=M3Clearance/2+CircTol,h=x*3,center=true,$fn=100);
             }
         } 
-        translate([WheelD/2,0,Wall+WheelMotorD/2-WheelMotorMountingHoleL]){
+        translate([Wall+WheelD/2,0,Wall+WheelMotorD/2-WheelMotorMountingHoleL]){
             rotate([90,0,0]){
-            cylinder(r=M3Clearance/2+CircTol,h=x*2,center=true,$fn=100);
+            cylinder(r=M3Clearance/2+CircTol,h=x*3,center=true,$fn=100);
             }
-        }        
+        }
+
+            translate([0,-Wall,WheelMotorD]){
+                rotate([0,theta,0]){
+                    cube([2*x,2*y,2*z]);
+                }
+            }
     }
             translate([Wall+BladeL+BladeDiskD/2,y/2,Wall]){
             cylinder(r=BladeMotorD/2+Wall,h=2*z,$fn=100);
@@ -282,7 +292,7 @@ translate([WheelD/2,0,Wall+WheelMotorD/2]){
         }
         
 }
-    
+  
 }
 
 module BladeDisk(){
