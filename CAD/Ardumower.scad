@@ -3,20 +3,18 @@ include <Library.scad>;
 //cube([290,275,250]);// print area
 //cylinder(8,95,center=false); //cutting disk
 
-Tub();
+//Tub();
 
 
- 
+
 translate([0,0,TubBottomFromGround]){
-  color("yellow"){  
+  color("LawnGreen"){  
 Tub();
   }
   
     
-                translate([Wall,(y-273)/2,WheelMotorD+3 ]){
-                rotate([0,-45,0]){
-        cube([4.5*25.4,273,0.06*25.4]);
-        }
+    translate([WheelD/4,(y-273)/2,Wall ]){               
+        cube([0.06*25.4,273,4.5*25.4]);   
     }
     
     translate([x-Wall-CornerRad/2-Brickx,(y-Bricky)/2,Wall]){
